@@ -1,3 +1,0 @@
-package com.example.payment.controller;
-import com.example.payment.PaymentProcessingService; import org.springframework.web.bind.annotation.*;
-@RestController @RequestMapping("/payments") public class PaymentController { private final PaymentProcessingService service; public PaymentController(PaymentProcessingService service){this.service=service;} @PostMapping public boolean process(@RequestBody PaymentRequest request){return service.charge(request.amount());} @PostMapping("/{bookingId}/refund") public void refund(@PathVariable String bookingId){service.refund(bookingId);} public record PaymentRequest(long amount){} }
